@@ -1,0 +1,11 @@
+{
+"project_name": "EPML",
+"project_slug": "EPML-wine-quality",
+"package_name": "wine_quality",
+"description": "EPML Data science project for the Wine Quality dataset",
+"author_name": "Egor Polyakov",
+"email": "leftgoga@gmail.com",
+"python_version": "3.13",
+"license": "MIT",
+"include_examples": "yes"
+}
