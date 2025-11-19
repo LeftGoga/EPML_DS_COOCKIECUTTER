@@ -1,25 +1,29 @@
-.PHONY: env install lint test notebook train evaluate
+.PHONY: all install run train lint format clean reinstall
 
-# Создать окружение и установить зависимости через Poetry
+
+all: install run
 install:
-	poetry install
+	poetry install --with dev
 
-# Проверка стиля кода
 lint:
-	poetry run black src tests && poetry run flake8 src tests
+	-poetry run ruff check src
+	-poetry run mypy src
 
-# Прогон тестов
-test:
-	poetry run pytest -q
 
-# Запуск Jupyter Notebook
-notebook:
-	poetry run jupyter notebook notebooks/01-exploration.ipynb
+format:
+	poetry run ruff format src
+	poetry run ruff check --select I --fix src
 
-# Обучение модели
-train:
-	poetry run python -m src.{{cookiecutter.package_name}}.model --train
+run train:
+	poetry run python -m wine_quality
 
-# Оценка модели
-evaluate:
-	poetry run python -m src.{{cookiecutter.package_name}}.model --evaluate
+clean:
+	rm -rf models/ plots/ __pycache__/ .pytest_cache/ .mypy_cache/ .ruff_cache/
+	find . -type f -name "*.pyc" -delete
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	@echo "Очистка завершена"
+
+reinstall:
+	poetry env remove --all
+	poetry install --with dev
+

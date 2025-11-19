@@ -6,21 +6,24 @@
 ## Структура
 - `data/` — raw и processed
 - `notebooks/` — Jupyter ноутбуки
+- `src/wine_quality/` — исходники
 - `src/{{cookiecutter.package_name}}/` — исходники
 - `tests/` — тесты
 
 ## Быстрый старт
 1. Сгенерировать проект:
-cookiecutter /path/to/cookiecutter_template
+cookiecutter https://github.com/LeftGoga/EPML_DS_COOCKIECUTTER.git
 
+2. Установить зависимости
+make install
+3. Запустить обучение:
+make run
 
-2. Установить зависимости (Poetry):
-cd {{cookiecutter.project_slug}}
-poetry install
-poetry shell
-
-3. Запустить ноутбук:
-make notebook
+4. Общая структура
+data.py - загрузка и предобработка данныз
+features.py - выделение фич и дополнительная предобработка
+mode.py - обучение модели
+utils.py - дополнительные компонетнты
 
 
 Автор: {{cookiecutter.author_name}} — {{cookiecutter.email}}
